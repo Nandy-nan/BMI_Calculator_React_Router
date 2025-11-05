@@ -1,5 +1,5 @@
 # Ex06 BMI Calculator
-## Date: 
+## Date: 10-11-2025
 
 ## AIM
 To develop a responsive and interactive Body Mass Index (BMI) Calculator using React that allows users to input their height and weight, and calculates their BMI to categorize their health status (e.g., Underweight, Normal, Overweight, Obese).
@@ -64,10 +64,201 @@ Create routing structure with react-router-dom:
 <li>Add styling using CSS or Tailwind.</li>
 
 ## PROGRAM
+```
+APP.JSX
+import './App.css';
+
+function App() {
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [bmi, setBmi] = useState(null);
+  const [message, setMessage] = useState('');
+
+  const calculateBMI = () => {
+    if (weight && height) {
+      const heightInMeters = height / 100;
+      const calculatedBMI = (weight / (heightInMeters * heightInMeters)).toFixed(2);
+      setBmi(calculatedBMI);
+      getBMICategory(calculatedBMI);
+    } else {
+      alert('Please enter valid height and weight.');
+    }
+  };
+
+  const getBMICategory = (bmi) => {
+    if (bmi < 18.5) setMessage('Underweight');
+    else if (bmi >= 18.5 && bmi < 24.9) setMessage('Normal weight');
+    else if (bmi >= 25 && bmi < 29.9) setMessage('Overweight');
+    else setMessage('Obese');
+  };
+
+  const resetFields = () => {
+    setWeight('');
+    setHeight('');
+    setBmi(null);
+    setMessage('');
+  };
+
+  return (
+    <div className="container">
+      <h1>BMI Calculator</h1>
+      <div className="input-group">
+        <label>Weight (kg):</label>
+        <input
+          type="number"
+          value={weight}
+          onChange={(e) => setWeight(e.target.value)}
+          placeholder="Enter weight"
+        />
+      </div>
+      <div className="input-group">
+        <label>Height (cm):</label>
+        <input
+          type="number"
+          value={height}
+          onChange={(e) => setHeight(e.target.value)}
+          placeholder="Enter height"
+        />
+      </div>
+      <button onClick={calculateBMI}>Calculate</button>
+      <button className="reset" onClick={resetFields}>Reset</button>
+      
+      {bmi && (
+        <div className="result">
+          <h2>Your BMI: {bmi}</h2>
+          <p className="message">{message}</p>
+        </div>
+      
+      )}
+      <div>
+        <footer>WORK BY:SENTHIL KUMARAN C</footer>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+```
+APP.CSS
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 35px 25px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+h1 {
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #2c3e50;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #dfe6e9;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #00bcd4;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  margin: 12px 6px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #00bcd4;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #0097a7;
+  transform: scale(1.05);
+}
+
+button.reset {
+  background-color: #95a5a6;
+}
+
+button.reset:hover {
+  background-color: #7f8c8d;
+}
+
+.result {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ecf0f1;
+  border-left: 5px solid #00bcd4;
+  text-align: center;
+}
+
+.result h2 {
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+.message {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+
+
+```
+
 
 
 
 ## OUTPUT
+<img width="774" height="362" alt="Screenshot 2025-11-05 081027" src="https://github.com/user-attachments/assets/c4ca8c11-fd38-4c0c-8c5b-1c9c62806b45" />
+
 
 
 
